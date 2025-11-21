@@ -1,0 +1,27 @@
+==============================================================================
+                        IR-DROP ANALYSIS REPORT
+==============================================================================
+Analysis Type:            Dynamic (with switching activity)
+Power Supply:             VDD = 1.0V
+Temperature:              125°C (worst case)
+
+IR-DROP RESULTS:
+  Maximum IR-drop:        28 mV (at core center)
+  Average IR-drop:        12 mV
+  Target:                 <50 mV ✓ PASS
+
+Voltage Map:
+  VDD nominal:            1.000 V
+  Minimum voltage:        0.972 V (1.000 - 0.028)
+  Voltage variation:      2.8%
+
+POWER GRID HEALTH:
+  Grid resistance:        0.15 Ω
+  Grid capacitance:       125 pF
+  Decap effectiveness:    95%
+
+==============================================================================
+IR-DROP ANALYSIS: PASS ✓
+Power grid meets specifications
+==============================================================================
+

@@ -1,0 +1,16 @@
+(DELAYFILE
+  (SDFVERSION "3.0")
+  (DESIGN "adder32")
+  (DATE "Jan 15 2024")
+  (VENDOR "PrimeTime")
+  (TIMESCALE 1ns)
+  
+  (CELL (CELLTYPE "adder32")
+    (INSTANCE)
+    (DELAY (ABSOLUTE
+      (IOPATH a[0] sum[0] (2.145:2.234:2.387) (2.098:2.187:2.298))
+      # ... (delay for all paths with min:typ:max)
+    ))
+  )
+)
+

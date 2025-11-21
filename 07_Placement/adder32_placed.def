@@ -1,0 +1,30 @@
+VERSION 5.8 ;
+DESIGN adder32 ;
+UNITS DISTANCE MICRONS 1000 ;
+
+DIEAREA ( 0 0 ) ( 50000 50000 ) ;
+
+# ==============================================================================
+# PLACED COMPONENTS - Standard cells with optimized locations
+# ==============================================================================
+COMPONENTS 452 ;
+  # Input registers - placed near left edge pads
+  - a_reg_reg_0_ DFFQX1 + PLACED ( 5200 3400 ) N ;
+  - a_reg_reg_1_ DFFQX1 + PLACED ( 5400 3400 ) N ;
+  # ... (all 65 input registers)
+  
+  # Full adder cells - placed in carry chain sequence
+  - fa_0_xor1 XOR2X1 + PLACED ( 15000 10000 ) N ;
+  - fa_0_xor2 XOR2X1 + PLACED ( 15200 10000 ) N ;
+  - fa_0_and1 AND2X1 + PLACED ( 15400 10000 ) N ;
+  # ... (160 gates for 32 full adders)
+  
+  # Output registers - placed near top edge pads
+  - sum_reg_0_ DFFQX1 + PLACED ( 25000 42000 ) N ;
+  # ... (34 output registers)
+  
+END COMPONENTS
+
+# Placement complete. Ready for Clock Tree Synthesis (CTS).
+END DESIGN
+

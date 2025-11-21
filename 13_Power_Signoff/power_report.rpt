@@ -1,0 +1,35 @@
+==============================================================================
+                        POWER ANALYSIS REPORT
+==============================================================================
+Design:                   adder32
+Technology:               28nm CMOS
+Frequency:                100 MHz
+Voltage:                  1.0 V
+Temperature:              25°C
+Activity:                 From switching.saif
+
+POWER BREAKDOWN:
+  Dynamic Power:          0.780 mW  (99.0%)
+    - Switching:          0.685 mW  (87.0%)
+    - Internal:           0.095 mW  (12.0%)
+  Leakage Power:          0.008 mW  (1.0%)
+  ======================================
+  TOTAL POWER:            0.788 mW  ✓
+
+POWER BY HIERARCHY:
+  Input Registers:        0.118 mW  (15.0%)
+  Adder Logic:            0.472 mW  (59.9%)
+  Output Registers:       0.102 mW  (12.9%)
+  Clock Network:          0.088 mW  (11.2%)
+  Leakage:                0.008 mW  (1.0%)
+
+COMPARISON TO TARGETS:
+  Total Power:            0.788 mW
+  Target:                 <1.0 mW
+  Margin:                 21.2% ✓
+
+==============================================================================
+POWER SIGNOFF: PASS ✓
+Power consumption within specifications
+==============================================================================
+

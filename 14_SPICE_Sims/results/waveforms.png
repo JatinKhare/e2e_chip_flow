@@ -1,0 +1,16 @@
+PLACEHOLDER - Waveform Image
+==============================================================================
+This would show SPICE waveforms for critical path simulation
+
+Traces displayed:
+- cin (carry input): Step from 0V to 1.0V at t=1ns
+- c1 (carry bit 1): Propagates at ~1.25ns
+- c16 (carry bit 16): Propagates at ~5.2ns
+- c31 (carry bit 31): Propagates at ~9.0ns
+- cout (carry output): Final transition at ~9.12ns
+
+Measured delay: 9.12 ns (cin to cout)
+
+Tool: HSPICE or Spectre
+==============================================================================
+

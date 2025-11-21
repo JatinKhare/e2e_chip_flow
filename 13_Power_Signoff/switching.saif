@@ -1,0 +1,17 @@
+(SAIFILE
+  (SAIFVERSION "2.0")
+  (DESIGN "adder32")
+  (DATE "Jan 15 2024")
+  (TIMESCALE 1ns)
+  
+  (INSTANCE adder32
+    (NET a[0] (T0 5000) (T1 5000) (TX 0) (TC 100))
+    (NET a[1] (T0 5100) (T1 4900) (TX 0) (TC 98))
+    # ... (switching activity for all nets)
+    (NET clk (T0 5000) (T1 5000) (TX 0) (TC 10000))
+  )
+)
+
+# SAIF contains toggle counts and time spent in each state
+# Used for accurate power calculation
+

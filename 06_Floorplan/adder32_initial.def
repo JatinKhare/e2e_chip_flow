@@ -1,0 +1,155 @@
+VERSION 5.8 ;
+DIVIDERCHAR "/" ;
+BUSBITCHARS "[]" ;
+
+DESIGN adder32 ;
+
+UNITS DISTANCE MICRONS 1000 ;
+
+# ==============================================================================
+# DIE AREA - Physical boundary of the chip
+# ==============================================================================
+DIEAREA ( 0 0 ) ( 50000 50000 ) ;
+# Die: 50µm × 50µm = 2500 µm²
+
+# ==============================================================================
+# ROWS - Defines where standard cells can be placed
+# ==============================================================================
+# Rows are created within core area for standard cell placement
+# Row height matches standard cell site (typically 0.2µm for 28nm)
+
+ROW ROW_0 core_site 2500 2500 N DO 225 BY 1 STEP 200 0 ;
+ROW ROW_1 core_site 2500 2700 FS DO 225 BY 1 STEP 200 0 ;
+ROW ROW_2 core_site 2500 2900 N DO 225 BY 1 STEP 200 0 ;
+# ... (rows continue to fill 45µm × 45µm core area)
+# Total rows: 45µm / 0.2µm = 225 rows
+
+# ==============================================================================
+# TRACKS - Routing grid definition
+# ==============================================================================
+# Define routing tracks for each metal layer
+
+TRACKS X 2500 DO 238 STEP 200 LAYER M1 ;
+TRACKS Y 2500 DO 238 STEP 200 LAYER M1 ;
+TRACKS X 2500 DO 119 STEP 400 LAYER M2 ;
+TRACKS Y 2500 DO 119 STEP 400 LAYER M2 ;
+TRACKS X 2500 DO 119 STEP 400 LAYER M3 ;
+TRACKS Y 2500 DO 119 STEP 400 LAYER M3 ;
+TRACKS X 2500 DO 60 STEP 800 LAYER M4 ;
+TRACKS Y 2500 DO 60 STEP 800 LAYER M4 ;
+TRACKS X 2500 DO 30 STEP 1600 LAYER M5 ;
+TRACKS Y 2500 DO 30 STEP 1600 LAYER M5 ;
+
+# ==============================================================================
+# COMPONENTS - I/O Pads (placed during floorplan)
+# ==============================================================================
+COMPONENTS 68 ;
+  # Input pads for operand 'a'
+  - a_pad_0 IOCell + PLACED ( 0 5000 ) N ;
+  - a_pad_1 IOCell + PLACED ( 0 7500 ) N ;
+  - a_pad_2 IOCell + PLACED ( 0 10000 ) N ;
+  # ... (additional a pads)
+  - a_pad_31 IOCell + PLACED ( 47500 0 ) E ;
+  
+  # Input pads for operand 'b'
+  - b_pad_0 IOCell + PLACED ( 50000 5000 ) S ;
+  # ... (additional b pads)
+  - b_pad_31 IOCell + PLACED ( 47500 50000 ) W ;
+  
+  # Control signal pads
+  - clk_pad IOCell + PLACED ( 2500 2500 ) N ;
+  - rst_n_pad IOCell + PLACED ( 47500 2500 ) N ;
+  - carry_in_pad IOCell + PLACED ( 2500 47500 ) N ;
+  
+  # Output pads
+  - carry_out_pad IOCell + PLACED ( 47500 47500 ) N ;
+  - overflow_pad IOCell + PLACED ( 45000 47500 ) N ;
+  
+END COMPONENTS
+
+# ==============================================================================
+# PINS - External connection points
+# ==============================================================================
+PINS 68 ;
+  # Input pins
+  - a[0] + NET a[0] + DIRECTION INPUT + LAYER M3 ( 0 0 ) ( 500 500 )
+    + PLACED ( 2500 5000 ) N ;
+  # ... (additional pins for a, b, control signals)
+  
+  # Output pins
+  - sum[0] + NET sum[0] + DIRECTION OUTPUT + LAYER M3 ( 0 0 ) ( 500 500 )
+    + PLACED ( 25000 47500 ) N ;
+  # ... (additional output pins)
+  
+END PINS
+
+# ==============================================================================
+# SPECIAL NETS - Power and Ground
+# ==============================================================================
+SPECIALNETS 2 ;
+  
+  # VDD power net
+  - VDD
+    + ROUTED M5 2000 + SHAPE RING
+      ( 2500 2500 ) ( 47500 2500 )
+      ( 47500 2500 ) ( 47500 47500 )
+      ( 47500 47500 ) ( 2500 47500 )
+      ( 2500 47500 ) ( 2500 2500 )
+    + ROUTED M4 500 + SHAPE STRIPE
+      ( 5000 2500 ) ( 5000 47500 )
+      ( 10000 2500 ) ( 10000 47500 )
+      ( 15000 2500 ) ( 15000 47500 )
+      ( 20000 2500 ) ( 20000 47500 )
+      ( 25000 2500 ) ( 25000 47500 )
+      ( 30000 2500 ) ( 30000 47500 )
+      ( 35000 2500 ) ( 35000 47500 )
+      ( 40000 2500 ) ( 40000 47500 )
+      ( 45000 2500 ) ( 45000 47500 ) ;
+  
+  # VSS ground net
+  - VSS
+    + ROUTED M5 2000 + SHAPE RING
+      ( 3000 3000 ) ( 47000 3000 )
+      ( 47000 3000 ) ( 47000 47000 )
+      ( 47000 47000 ) ( 3000 47000 )
+      ( 3000 47000 ) ( 3000 3000 )
+    + ROUTED M4 500 + SHAPE STRIPE
+      ( 7500 2500 ) ( 7500 47500 )
+      ( 12500 2500 ) ( 12500 47500 )
+      ( 17500 2500 ) ( 17500 47500 )
+      ( 22500 2500 ) ( 22500 47500 )
+      ( 27500 2500 ) ( 27500 47500 )
+      ( 32500 2500 ) ( 32500 47500 )
+      ( 37500 2500 ) ( 37500 47500 )
+      ( 42500 2500 ) ( 42500 47500 ) ;
+  
+END SPECIALNETS
+
+# ==============================================================================
+# BLOCKAGES - Placement restrictions (if any)
+# ==============================================================================
+# No placement blockages for this simple design
+# In larger designs, would reserve space for macros, routing channels
+
+# ==============================================================================
+# REGIONS - Logical grouping (if any)
+# ==============================================================================
+# Could define regions for hierarchical blocks
+# Not needed for flat 32-bit adder
+
+# ==============================================================================
+# END OF DEF FILE
+# ==============================================================================
+# This DEF file defines the initial floorplan only.
+# After placement and routing, this file will be updated with:
+#   - Actual cell locations (COMPONENTS with coordinates)
+#   - Routed nets (NETS section)
+#   - Via definitions
+#   - Detailed routing geometry
+#
+# Purpose: Establishes physical framework for place-and-route
+# Next Step: 07_Placement will place standard cells within defined rows
+# ==============================================================================
+
+END DESIGN
+

@@ -1,0 +1,44 @@
+*SPEF "IEEE 1481-1999"
+*DESIGN "adder32"
+*DATE "Jan 15 2024"
+*VENDOR "Extraction Tool"
+*PROGRAM "StarRC"
+*VERSION "2023.03"
+*DIVIDER /
+*DELIMITER :
+*BUS_DELIMITER []
+*T_UNIT 1 NS
+*C_UNIT 1 PF
+*R_UNIT 1 OHM
+*L_UNIT 1 HENRY
+
+*NAME_MAP
+*520 nets with parasitic RC
+
+*PORTS
+a[0] I
+a[1] I
+# ... (all ports)
+sum[0] O
+carry_out O
+overflow O
+
+*D_NET a_reg[0] 0.0234
+*CONN
+*P a[0] I
+*I a_reg_reg_0_:D I
+*CAP
+1 a_reg[0]:1 0.0145
+2 a_reg[0]:2 0.0089
+*RES
+1 a_reg[0]:1 a_reg[0]:2 12.4
+*END
+
+# ... (parasitic data for all 520 nets)
+
+*END
+
+# This SPEF file contains extracted parasitics for timing analysis
+# Total Capacitance: 2.85 pF
+# Total Resistance: 145 Ω
+

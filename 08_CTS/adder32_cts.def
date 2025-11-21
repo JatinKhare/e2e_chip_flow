@@ -1,0 +1,18 @@
+VERSION 5.8 ;
+DESIGN adder32 ;
+
+# Clock tree inserted with buffers
+COMPONENTS 464 ;
+  # Original 452 cells plus 12 clock buffers
+  - clk_buf_0 BUFX4 + PLACED ( 25000 25000 ) N ;
+  - clk_buf_1 BUFX4 + PLACED ( 20000 20000 ) N ;
+  # ... (clock tree structure)
+END COMPONENTS
+
+# Clock net routed
+NETS 1 ;
+  - clk ( clk_pad clk_buf_0 clk_buf_1 ... ) + ROUTED M3 ... ;
+END NETS
+
+END DESIGN
+

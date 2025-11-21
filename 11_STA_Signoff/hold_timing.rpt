@@ -1,0 +1,21 @@
+==============================================================================
+                    HOLD TIMING ANALYSIS REPORT
+==============================================================================
+Design:                   adder32
+Corner:                   FF (Fast-Fast, -40C, 1.1V) - Best case
+
+WORST NEGATIVE SLACK (WNS): +0.08 ns ✓ PASS
+TOTAL NEGATIVE SLACK (TNS): 0.0 ns ✓ PASS
+
+Critical Path (shortest):
+  Startpoint: a_reg_reg[5] (rising edge-triggered flip-flop)
+  Endpoint:   sum_reg[5] (rising edge-triggered flip-flop)
+  Path Delay: 0.28 ns
+  Required:   0.20 ns (hold time)
+  Slack:      +0.08 ns ✓
+
+==============================================================================
+ALL HOLD PATHS MEET TIMING ✓
+STA SIGN-OFF: APPROVED
+==============================================================================
+

@@ -1,0 +1,14 @@
+SPICE Simulation Results - Binary Data Placeholder
+==============================================================================
+This file would contain raw simulation data in tool-specific format
+
+Includes:
+- Time points
+- Voltage/current values for all nodes
+- Measured delays
+- Power consumption
+
+Format: HSPICE .tr0/.ac0 or Spectre .raw
+Size: Typically 10-100 MB for full design
+==============================================================================
+

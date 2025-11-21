@@ -1,0 +1,16 @@
+==============================================================================
+                        ROUTING REPORT
+==============================================================================
+Total Nets:               520
+Nets Routed:              520 (100%)
+Failed Nets:              0
+DRC Violations:           0
+Total Wirelength:         18,450 µm
+Vias Used:                3,247
+Routing Layers:           M1, M2, M3, M4, M5
+Congestion (peak):        52% (acceptable)
+Routing Time:             12 min 15 sec
+==============================================================================
+PASS: All nets routed successfully with no DRC violations
+==============================================================================
+

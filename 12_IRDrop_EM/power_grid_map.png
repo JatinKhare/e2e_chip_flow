@@ -1,0 +1,15 @@
+PLACEHOLDER IMAGE - Power Grid Voltage Map
+==============================================================================
+This would be a color-coded heatmap showing voltage distribution across chip
+
+Legend:
+  Red:    Low voltage (high IR-drop)
+  Yellow: Moderate
+  Green:  Good voltage (minimal IR-drop)
+
+Typical visualization shows core center with slightly lower voltage
+due to distance from power pads, but within acceptable limits.
+
+Tool: Ansys RedHawk or Cadence Voltus
+==============================================================================
+

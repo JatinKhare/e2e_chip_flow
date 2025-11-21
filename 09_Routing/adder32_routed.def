@@ -1,0 +1,14 @@
+VERSION 5.8 ;
+DESIGN adder32 ;
+
+# All nets fully routed with detailed geometry
+NETS 520 ;
+  - a_reg[0] ( a_pad_0 a_reg_reg_0_ ) 
+    + ROUTED M1 ( 2500 5000 ) ( 5200 5000 )
+    NEW M2 ( 5200 5000 ) ( 5200 3400 ) ;
+  # ... (519 more nets with full routing geometry)
+END NETS
+
+# Design fully routed, ready for extraction
+END DESIGN
+

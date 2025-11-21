@@ -1,0 +1,56 @@
+VERSION 5.8 ;
+BUSBITCHARS "[]" ;
+DIVIDERCHAR "/" ;
+
+MACRO adder32
+  CLASS BLOCK ;
+  FOREIGN adder32 0.0 0.0 ;
+  ORIGIN 0.0 0.0 ;
+  SIZE 50.0 BY 50.0 ;
+  
+  PIN a[0]
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M3 ;
+        RECT 2.4 4.9 2.6 5.1 ;
+    END
+  END a[0]
+  
+  # ... (pins for all 68 I/O)
+  
+  PIN sum[0]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M3 ;
+        RECT 24.9 47.4 25.1 47.6 ;
+    END
+  END sum[0]
+  
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER M5 ;
+        RECT 0.0 0.0 50.0 50.0 ;
+    END
+  END VDD
+  
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER M5 ;
+        RECT 0.0 0.0 50.0 50.0 ;
+    END
+  END VSS
+  
+  OBS
+    # Obstruction layer (placement blockages)
+  END
+  
+END adder32
+
+END LIBRARY
+

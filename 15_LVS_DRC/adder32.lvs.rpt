@@ -1,0 +1,40 @@
+==============================================================================
+                    LAYOUT VS. SCHEMATIC (LVS) REPORT
+==============================================================================
+Tool:                     Mentor Calibre nmLVS
+Design:                   adder32
+Technology:               28nm CMOS
+Date:                     Jan 15 2024
+
+LAYOUT SOURCE:
+  GDS File:               09_Routing/adder32_routed.gds
+  Top Cell:               adder32
+
+SCHEMATIC SOURCE:
+  Netlist:                04_Synthesis/adder32_netlist.v
+  Format:                 Verilog
+
+COMPARISON RESULTS:
+  Overall:                CORRECT ✓
+  
+  Nets:
+    Layout:               520
+    Schematic:            520
+    Matched:              520 ✓
+    
+  Devices:
+    Layout Transistors:   2,847
+    Schematic Transistors: 2,847
+    Matched:              2,847 ✓
+    
+  Ports:
+    Layout:               68
+    Schematic:            68
+    Matched:              68 ✓
+
+DISCREPANCIES:           None ✓
+
+==============================================================================
+LVS CHECK: PASS ✓ - Layout matches schematic
+==============================================================================
+

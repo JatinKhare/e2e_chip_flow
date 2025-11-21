@@ -1,0 +1,14 @@
+GDSII STREAM FORMAT PLACEHOLDER
+==============================================================================
+This file represents the GDSII layout after routing.
+In real flow, this would be binary data viewable in Cadence Virtuoso,
+Mentor Calibre, or other layout viewers.
+
+Contains:
+- All standard cells with actual transistor layouts
+- Metal routing on M1-M5 layers
+- Vias connecting layers
+- Power grid structure
+- I/O pads
+==============================================================================
+

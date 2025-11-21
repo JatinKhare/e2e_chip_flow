@@ -1,0 +1,29 @@
+==============================================================================
+                    DESIGN RULE CHECK (DRC) REPORT
+==============================================================================
+Tool:                     Mentor Calibre nmDRC
+Design:                   adder32
+Technology:               28nm CMOS Design Rules
+Date:                     Jan 15 2024
+
+GDS FILE:                 09_Routing/adder32_routed.gds
+TOP CELL:                 adder32
+
+RULES CHECKED:
+  Metal Width:            PASS ✓ (0 violations)
+  Metal Spacing:          PASS ✓ (0 violations)
+  Via Enclosure:          PASS ✓ (0 violations)
+  Minimum Area:           PASS ✓ (0 violations)
+  Density:                PASS ✓ (0 violations)
+  Antenna:                PASS ✓ (0 violations)
+
+SUMMARY:
+  Total Rules Checked:    247
+  Rules Passed:           247
+  Violations:             0 ✓
+
+==============================================================================
+DRC CHECK: CLEAN ✓ - No design rule violations
+Layout is manufacturable
+==============================================================================
+

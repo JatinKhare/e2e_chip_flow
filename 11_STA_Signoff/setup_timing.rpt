@@ -1,0 +1,32 @@
+==============================================================================
+                    SETUP TIMING ANALYSIS REPORT
+==============================================================================
+Design:                   adder32
+Corner:                   SS (Slow-Slow, 125C, 0.9V) - Worst case
+Clock Period:             10.0 ns (100 MHz)
+
+WORST NEGATIVE SLACK (WNS): +0.42 ns ✓ PASS
+TOTAL NEGATIVE SLACK (TNS): 0.0 ns ✓ PASS
+
+Critical Path:
+  Startpoint: carry_in_reg (rising edge-triggered flip-flop)
+  Endpoint:   carry_out_reg (rising edge-triggered flip-flop)
+  Path Delay: 9.08 ns
+  Required:   9.50 ns
+  Slack:      +0.42 ns ✓
+
+Path Details:
+  carry_in_reg/CK → Q           0.52 ns  (clock-to-Q)
+  + FA_0 carry logic            0.28 ns
+  + FA_1 carry logic            0.28 ns
+  ...
+  + FA_31 carry logic           0.28 ns
+  + Wire delays                 1.24 ns  (from SPEF)
+  + carry_out_reg D → setup     0.48 ns
+  =====================================
+  Total Path Delay:             9.08 ns
+
+==============================================================================
+ALL SETUP PATHS MEET TIMING ✓
+==============================================================================
+
