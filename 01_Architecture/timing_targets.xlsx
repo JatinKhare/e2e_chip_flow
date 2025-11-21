@@ -1,0 +1,117 @@
+# TIMING TARGETS - 32-bit Adder
+# This is a text placeholder for an Excel spreadsheet
+# In a real flow, this would be a .xlsx file with formatted tables and charts
+
+===============================================================================
+                        TIMING REQUIREMENTS SPECIFICATION
+===============================================================================
+
+PROJECT: 32-bit Ripple-Carry Adder
+TECHNOLOGY: 28nm CMOS
+VERSION: 1.0
+DATE: 2024-01-15
+
+===============================================================================
+                            CLOCK SPECIFICATIONS
+===============================================================================
+
+Parameter                    | Target Value  | Min      | Max      | Units
+-------------------------------------------------------------------------
+Clock Frequency              | 100           | 80       | 150      | MHz
+Clock Period                 | 10.0          | 6.67     | 12.5     | ns
+Clock Jitter                 | -             | -        | 100      | ps
+Clock Duty Cycle             | 50            | 45       | 55       | %
+Clock Skew (Global)          | -             | -        | 200      | ps
+Clock Uncertainty            | 0.5           | -        | -        | ns
+
+===============================================================================
+                         SEQUENTIAL TIMING PARAMETERS
+===============================================================================
+
+Parameter                    | Typical | Fast     | Slow     | Units
+-------------------------------------------------------------------------
+Setup Time (TH)              | 0.5     | 0.3      | 0.8      | ns
+Hold Time (TH)               | 0.2     | 0.1      | 0.4      | ns
+Clock-to-Q Delay (TCQ)       | 1.5     | 1.0      | 2.5      | ns
+Pulse Width (min)            | 4.0     | 3.0      | 5.0      | ns
+Recovery Time                | 0.6     | 0.4      | 1.0      | ns
+Removal Time                 | 0.4     | 0.2      | 0.8      | ns
+
+===============================================================================
+                        COMBINATIONAL PATH DELAYS
+===============================================================================
+
+Path Description             | Target  | Fast     | Slow     | Units
+-------------------------------------------------------------------------
+Single Full Adder            | 0.25    | 0.18     | 0.35     | ns
+4-bit Ripple Chain           | 1.0     | 0.72     | 1.4      | ns
+8-bit Ripple Chain           | 2.0     | 1.44     | 2.8      | ns
+16-bit Ripple Chain          | 4.0     | 2.88     | 5.6      | ns
+32-bit Ripple Chain (Full)   | 8.0     | 5.76     | 11.2     | ns
+Overflow Logic               | 0.5     | 0.35     | 0.8      | ns
+
+===============================================================================
+                        INPUT/OUTPUT TIMING
+===============================================================================
+
+Parameter                    | Target  | Min      | Max      | Units
+-------------------------------------------------------------------------
+Input Setup Time (external)  | 2.0     | -        | -        | ns
+Input Hold Time (external)   | 1.0     | -        | -        | ns
+Output Valid Delay           | -       | -        | 8.0      | ns
+Input Capacitance            | -       | -        | 50       | fF
+Output Drive Strength        | -       | 100      | -        | µA
+
+===============================================================================
+                        TIMING MARGINS & DERATING
+===============================================================================
+
+Corner                       | Temperature | Voltage  | Derating | Margin
+-------------------------------------------------------------------------
+Typical (TT)                 | 25°C        | 1.0V     | 0%       | 20%
+Fast (FF)                    | -40°C       | 1.1V     | -15%     | 15%
+Slow (SS)                    | 125°C       | 0.9V     | +25%     | 25%
+Fast-Slow (FS)               | 25°C        | 1.0V     | +5%      | 20%
+Slow-Fast (SF)               | 25°C        | 1.0V     | +5%      | 20%
+
+===============================================================================
+                        CRITICAL PATH BUDGET
+===============================================================================
+
+Segment                      | Allocation | Actual   | Slack    | Status
+-------------------------------------------------------------------------
+Launch Flop (TCQ)            | 2.0 ns     | 1.5 ns   | +0.5 ns  | OK
+Input Logic                  | 0.5 ns     | 0.3 ns   | +0.2 ns  | OK
+32-bit Adder Chain           | 6.0 ns     | 8.0 ns   | -2.0 ns  | FAIL*
+Output Logic                 | 0.5 ns     | 0.4 ns   | +0.1 ns  | OK
+Capture Flop Setup           | 0.5 ns     | 0.5 ns   | 0.0 ns   | MARGINAL
+Wire Delay Estimate          | 0.5 ns     | 0.3 ns   | +0.2 ns  | OK
+-------------------------------------------------------------------------
+TOTAL PATH                   | 10.0 ns    | 11.0 ns  | -1.0 ns  | NEEDS OPT
+
+* Note: May require pipeline stage or faster adder architecture (CLA/CSA)
+
+===============================================================================
+                        TIMING CLOSURE STRATEGY
+===============================================================================
+
+Strategy                                 | Priority | Status
+-------------------------------------------------------------------------
+Use low-VT cells on critical path        | HIGH     | Planned
+Insert pipeline stage after bit 16       | MEDIUM   | Option
+Optimize floorplan to reduce wire delay  | HIGH     | In progress
+Use faster carry chain architecture      | MEDIUM   | Under review
+Increase clock period to 12ns (83MHz)    | LOW      | Fallback
+
+===============================================================================
+                        MULTI-CYCLE & FALSE PATHS
+===============================================================================
+
+Path Type                    | Source       | Destination  | Cycles
+-------------------------------------------------------------------------
+Reset Path                   | rst_n        | All FFs      | Async
+Test Mode                    | test_mode    | All FFs      | False Path
+
+===============================================================================
+END OF TIMING TARGETS DOCUMENT
+===============================================================================

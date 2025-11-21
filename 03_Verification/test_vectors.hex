@@ -1,0 +1,192 @@
+# TEST VECTORS FOR 32-BIT ADDER
+# Format: A(hex) B(hex) CIN(binary) EXPECTED_SUM(hex) EXPECTED_COUT EXPECTED_OVF
+# Lines starting with # are comments
+
+# ==============================================================================
+# Basic Tests
+# ==============================================================================
+
+# Test 1: 0 + 0 + 0 = 0
+00000000 00000000 0 00000000 0 0
+
+# Test 2: 0 + 1 + 0 = 1
+00000000 00000001 0 00000001 0 0
+
+# Test 3: 1 + 1 + 0 = 2
+00000001 00000001 0 00000002 0 0
+
+# Test 4: 1 + 1 + 1 = 3
+00000001 00000001 1 00000003 0 0
+
+# ==============================================================================
+# All Ones Tests
+# ==============================================================================
+
+# Test 5: 0xFFFFFFFF + 0 + 0 = 0xFFFFFFFF
+FFFFFFFF 00000000 0 FFFFFFFF 0 0
+
+# Test 6: 0xFFFFFFFF + 1 + 0 = 0 (with carry)
+FFFFFFFF 00000001 0 00000000 1 0
+
+# Test 7: 0xFFFFFFFF + 0xFFFFFFFF + 0 = 0xFFFFFFFE (with carry)
+FFFFFFFF FFFFFFFF 0 FFFFFFFE 1 0
+
+# Test 8: 0xFFFFFFFF + 0xFFFFFFFF + 1 = 0xFFFFFFFF (with carry)
+FFFFFFFF FFFFFFFF 1 FFFFFFFF 1 0
+
+# ==============================================================================
+# Carry-in Tests
+# ==============================================================================
+
+# Test 9: Carry-in effect
+00000000 00000000 1 00000001 0 0
+
+# Test 10: Carry-in with max value
+FFFFFFFE 00000000 1 FFFFFFFF 0 0
+
+# Test 11: Carry-in with wrap
+FFFFFFFF 00000000 1 00000000 1 0
+
+# ==============================================================================
+# Signed Overflow Tests (Positive + Positive = Negative)
+# ==============================================================================
+
+# Test 12: Max positive + 1 = negative (overflow)
+7FFFFFFF 00000001 0 80000000 0 1
+
+# Test 13: Max positive + Max positive (overflow)
+7FFFFFFF 7FFFFFFF 0 FFFFFFFE 0 1
+
+# Test 14: Large positive + large positive (overflow)
+40000000 40000000 0 80000000 0 1
+
+# Test 15: Positive + positive near boundary
+60000000 30000000 0 90000000 0 1
+
+# ==============================================================================
+# Signed Overflow Tests (Negative + Negative = Positive)
+# ==============================================================================
+
+# Test 16: Min negative + Min negative (overflow)
+80000000 80000000 0 00000000 1 1
+
+# Test 17: Min negative + large negative (overflow)
+80000000 80000001 0 00000001 1 1
+
+# Test 18: Two large negatives (overflow)
+A0000000 A0000000 0 40000000 1 1
+
+# Test 19: Negative + negative near boundary
+C0000000 C0000000 0 80000000 1 1
+
+# ==============================================================================
+# No Overflow Tests (Mixed Signs)
+# ==============================================================================
+
+# Test 20: Max positive + Min negative = -1 (no overflow)
+7FFFFFFF 80000000 0 FFFFFFFF 0 0
+
+# Test 21: Max positive + (-1) (no overflow)
+7FFFFFFF FFFFFFFF 0 7FFFFFFE 1 0
+
+# Test 22: Positive + negative
+12345678 FEDCBA98 0 11111110 1 0
+
+# Test 23: Large positive + small negative
+7FFFFFFF F0000000 0 6FFFFFFF 1 0
+
+# ==============================================================================
+# Alternating Bit Patterns
+# ==============================================================================
+
+# Test 24: 0xAAAAAAAA + 0x55555555 = 0xFFFFFFFF
+AAAAAAAA 55555555 0 FFFFFFFF 0 0
+
+# Test 25: 0xAAAAAAAA + 0xAAAAAAAA
+AAAAAAAA AAAAAAAA 0 55555554 1 0
+
+# Test 26: 0x55555555 + 0x55555555
+55555555 55555555 0 AAAAAAAA 0 0
+
+# ==============================================================================
+# Powers of 2
+# ==============================================================================
+
+# Test 27: 2^0 + 2^0 = 2
+00000001 00000001 0 00000002 0 0
+
+# Test 28: 2^1 + 2^1 = 4
+00000002 00000002 0 00000004 0 0
+
+# Test 29: 2^16 + 2^16 = 2^17
+00010000 00010000 0 00020000 0 0
+
+# Test 30: 2^31 + 2^31 = 0 (with carry and overflow)
+80000000 80000000 0 00000000 1 1
+
+# ==============================================================================
+# Carry Chain Tests (propagation through all bits)
+# ==============================================================================
+
+# Test 31: Carry propagates through all bits
+FFFFFFFF 00000001 0 00000000 1 0
+
+# Test 32: Carry propagates from bit 0 to bit 15
+0000FFFF 00000001 0 00010000 0 0
+
+# Test 33: Carry propagates from bit 0 to bit 31
+7FFFFFFF 00000001 0 80000000 0 1
+
+# ==============================================================================
+# Sequential Patterns
+# ==============================================================================
+
+# Test 34: Incrementing pattern
+00000000 00000001 0 00000001 0 0
+00000001 00000001 0 00000002 0 0
+00000002 00000001 0 00000003 0 0
+00000003 00000001 0 00000004 0 0
+
+# ==============================================================================
+# Random-like Patterns
+# ==============================================================================
+
+# Test 38: Random test 1
+12345678 9ABCDEF0 0 ACFACF68 0 0
+
+# Test 39: Random test 2
+DEADBEEF CAFEBABE 0 A9AC7DAD 1 0
+
+# Test 40: Random test 3
+0F0F0F0F F0F0F0F0 0 FFFFFFFF 0 0
+
+# ==============================================================================
+# Edge Cases
+# ==============================================================================
+
+# Test 41: Second to max value + 1
+FFFFFFFE 00000001 0 FFFFFFFF 0 0
+
+# Test 42: One + Max value
+00000001 FFFFFFFF 0 00000000 1 0
+
+# Test 43: Largest positive + smallest negative (no overflow)
+7FFFFFFF 80000000 0 FFFFFFFF 0 0
+
+# Test 44: All bit transitions
+00000000 FFFFFFFF 0 FFFFFFFF 0 0
+
+# ==============================================================================
+# Comprehensive Carry Tests
+# ==============================================================================
+
+# Test 45-48: Specific carry scenarios
+00007FFF 00000001 0 00008000 0 0
+0000FFFF 00000001 0 00010000 0 0
+00FFFFFF 00000001 0 01000000 0 0
+FFFFFFFF 00000000 0 FFFFFFFF 0 0
+
+# ==============================================================================
+# END OF TEST VECTORS
+# ==============================================================================
+
